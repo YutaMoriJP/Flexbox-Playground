@@ -77,7 +77,12 @@ const BoxDisplay = ({ count, index, self, isReset }) => {
           </Form>
         </Child>
       )}
-      <Box flexGrow={flexGrow} flexShrink={flexShrink} flexBasis={flexBasis}>
+      <Box
+        flexGrow={flexGrow}
+        flexShrink={flexShrink}
+        flexBasis={flexBasis}
+        active={+count === +index && 1}
+      >
         {index}
       </Box>
     </>

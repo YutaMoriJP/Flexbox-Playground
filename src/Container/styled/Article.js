@@ -24,6 +24,7 @@ const Article = styled.article`
 `;
 
 const Box = styled.article`
+border: ${(props) => (props.active ? "2px solid white" : `2px solid #12b886`)};
   box-sizing: border-box;
   background: #12b886;
   padding: 50px;
