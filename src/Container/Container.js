@@ -22,11 +22,7 @@ const BoxDisplay = ({ count, index, self, isReset }) => {
     }
   );
   const renderCount = useRef(0);
-  console.log(`state on comp ${index} looks like`, {
-    flexGrow,
-    flexShrink,
-    flexBasis
-  });
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -34,6 +30,8 @@ const BoxDisplay = ({ count, index, self, isReset }) => {
   };
   const reset = () => {
     dispatch({ type: "RESET" });
+    [1, 2, 3, 4, 5].forEach((count) => localStorage.removeItem(`flex${count}`));
+    console.log("storage cleared");
   };
 
   useEffect(() => {
