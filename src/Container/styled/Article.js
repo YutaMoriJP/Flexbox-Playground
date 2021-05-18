@@ -8,7 +8,7 @@ const Article = styled.article`
   width: 100%;
   margin: auto;
   background-color: #343a40;
-  min-height: 70vh;
+  height: 70vh;
   ${(props) =>
     props.display === "flex" &&
     css`
