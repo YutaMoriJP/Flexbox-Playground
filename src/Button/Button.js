@@ -8,7 +8,8 @@ const StyledButton = styled.button`
   color: white;
   font-weight: 500;
   border: 0;
-
+  position: relative;
+  z-index: 100;
   &:hover {
     background-color: #364fc7;
   }
