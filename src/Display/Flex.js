@@ -10,12 +10,12 @@ import {
   directions,
   justifys,
   aligns,
-  contents
+  contents,
 } from "../data/options";
 
 export default function Flex() {
   const isMobile = useMediaQuery(600);
-  const [count, setCount] = React.useState(isMobile ? 5 : 3);
+  const [count, setCount] = React.useState(3);
   const [direction, setDirection] = React.useState("row");
   const [justify, setJustify] = React.useState("center");
   const [align, setAlign] = React.useState("stretch");
@@ -28,13 +28,13 @@ export default function Flex() {
     setAlign("stretch");
     setWrap(isMobile ? "wrap" : "no-wrap");
     setContent("stretch");
-    setCount(isMobile ? 5 : 3);
+    setCount(3);
   };
   return (
     <>
       <Selectors>
         <Select
-          type="Select Count:"
+          type="Total Flex Items:"
           value={count}
           options={counts}
           onChange={setCount}
@@ -75,6 +75,7 @@ export default function Flex() {
         display="flex"
         justify={justify}
         count={count}
+        setCount={setCount}
         direction={direction}
         align={align}
         wrap={wrap}
@@ -84,11 +85,3 @@ export default function Flex() {
     </>
   );
 }
-
-/* <Select
-        type="Align-Self"
-        options={selves}
-        value={self}
-        onChange={setSelf}
-      />
-      <Select type="Flex" options={flexes} value={flex} onChange={setFlex} />*/

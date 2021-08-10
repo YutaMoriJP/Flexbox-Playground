@@ -9,31 +9,25 @@ import Form from "../Form/Form";
 import Input from "../Form/Input";
 import Select from "../Select/Select";
 
-const BoxDisplay = ({ count, index, self, isReset }) => {
+const BoxDisplay = ({ count, index, setOption, self, isReset }) => {
   const [{ flexGrow, flexShrink, flexBasis }, dispatch] = useReducer(
     reducer,
     initialValue,
-    (init) => {
-      console.log(init);
-      console.log("lazy loader is called");
+    init => {
       const obj = JSON.parse(localStorage.getItem(`flex${index}`));
-      console.log(obj);
       return JSON.parse(localStorage.getItem(`flex${index}`)) || init;
     }
   );
   const renderCount = useRef(0);
-  console.log(`state on comp ${index} looks like`, {
-    flexGrow,
-    flexShrink,
-    flexBasis
-  });
-  const handleChange = (event) => {
+
+  const handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
     dispatch({ type: "UPDATE", payload: { name, value } });
   };
   const reset = () => {
     dispatch({ type: "RESET" });
+    localStorage.clear();
   };
 
   useEffect(() => {
@@ -77,7 +71,13 @@ const BoxDisplay = ({ count, index, self, isReset }) => {
           </Form>
         </Child>
       )}
-      <Box flexGrow={flexGrow} flexShrink={flexShrink} flexBasis={flexBasis}>
+      <Box
+        flexGrow={flexGrow}
+        flexShrink={flexShrink}
+        flexBasis={flexBasis}
+        current={count == index}
+        onClick={() => setOption(index)}
+      >
         {index}
       </Box>
     </>
@@ -86,18 +86,18 @@ const BoxDisplay = ({ count, index, self, isReset }) => {
 
 const useToggle = () => {
   const [bool, setBool] = useState(false);
-  const toggle = () => setBool((prevBool) => !prevBool);
+  const toggle = () => setBool(prevBool => !prevBool);
   return [bool, toggle];
 };
 
-const Container = ({ count, reset, ...rest }) => {
+const Container = ({ count, reset, setCount, ...rest }) => {
   const counts = Array.from({ length: count });
   const options = Array.from({ length: count }, (_, num) => ({
     value: num + 1,
-    id: num + 1
+    id: num + 1,
   }));
   const [option, setOption] = useState(1);
-  const onChange = (num) => setOption(num);
+  const onChange = num => setOption(num);
   const [bool, toggle] = useToggle();
   const fullreset = () => {
     reset();
@@ -129,6 +129,7 @@ const Container = ({ count, reset, ...rest }) => {
               key={key}
               self={rest.self}
               isReset={bool}
+              setOption={setOption}
             />
           );
         })}
@@ -138,20 +139,3 @@ const Container = ({ count, reset, ...rest }) => {
 };
 
 export default Container;
-//box
-
-/*
-    width: ${(props) => props.width || "50px"};
-  @media (min-width: 500px) {
-    width: ${(props) => props.width || "80px"};
-  }
-  @media (min-width: 800px) {
-    width: ${(props) => props.width || "150px"};
-  }
-  @media (min-width: 1000px) {
-    width: ${(props) => props.width || "180px"};
-  }
-  @media (min-width: 1200px) {
-    width: ${(props) => props.width || "180px"};
-  }
-  */

@@ -17,6 +17,7 @@ const Child = styled.article`
   background-color: #343a40;
   justify-content: center;
   gap: 5px;
+
   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
   padding: 5px;
   > * {
