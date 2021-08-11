@@ -11,15 +11,9 @@ const StyledButton = styled.button`
   border: 0;
   position: relative;
   z-index: 100;
-<<<<<<< HEAD
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
   :hover {
     transform: scale(1.1);
-=======
-  &:hover {
-    background-color: #364fc7;
->>>>>>> dec090b460a1dacb4977c17a8236dbb10629ec2e
-  }
   :active {
     background-color: #045de9;
     background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
